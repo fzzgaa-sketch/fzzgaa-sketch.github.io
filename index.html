@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mauwtf — SS Manager Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #141414;
+            --text-color: #e0e0e0;
+            --accent-color: #ffffff;
+            --muted-color: #7a7a7a;
+            --border-color: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Encabezado y Navegación */
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--muted-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav a {
+            color: var(--muted-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Secciones Generales */
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* Grid de Introducción */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .intro-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .card-num {
+            color: var(--muted-color);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .intro-card h3 {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .intro-card p {
+            font-size: 0.9rem;
+            color: var(--muted-color);
+        }
+
+        /* Sección Contacto / Discord */
+        .contact-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .discord-tag {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .btn-copy {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        .btn-copy:hover {
+            opacity: 0.9;
+        }
+
+        /* Acordeón de Experiencia */
+        .exp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .exp-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .exp-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .exp-title strong {
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .exp-title span {
+            color: var(--muted-color);
+            font-size: 0.85rem;
+        }
+
+        .exp-arrow {
+            color: var(--muted-color);
+            transition: transform 0.3s;
+        }
+
+        .exp-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .exp-body {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--muted-color);
+        }
+
+        .exp-item.active .exp-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Sección Conclusión / Footer */
+        .conclusion {
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+            margin-top: 60px;
+        }
+
+        .conclusion p {
+            margin-bottom: 15px;
+            color: var(--muted-color);
+        }
+
+        .conclusion footer {
+            margin-top: 30px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 600px) {
+            .contact-box {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- ENCABEZADO -->
+        <header>
+            <div class="logo"># mauwtf.</div>
+            <div class="subtitle">Staff Portfolio · Screenshare · Moderación · Experiencia</div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">01 / Intro</a></li>
+                    <li><a href="#contact">02 / Contact</a></li>
+                    <li><a href="#experience">03 / Experience</a></li>
+                    <li><a href="#conclusion">04 / Extra</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- INTRODUCCIÓN -->
+        <section id="intro">
+            <div class="section-tag">01 / About</div>
+            <h2>Introducción</h2>
+            <p>Mi nombre es <strong>mauwtf</strong>, me dedico al desarrollo, moderación y gestión de redes en servidores de Minecraft. En mi tiempo libre lo paso gestionando y moderando comunidades donde formo parte del staff para aportar mi experiencia, optimizar la convivencia y afrontar nuevos retos técnicos.</p>
+            
+            <div class="intro-grid">
+                <div class="intro-card">
+                    <div class="card-num">01</div>
+                    <h3>Orden</h3>
+                    <p>Compromiso absoluto con el respeto y el profesionalismo en el equipo.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="card-num">02</div>
+                    <h3>Disciplina</h3>
+                    <p>Mantenerse constantemente atento y activo ante cualquier situación o reporte.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="card-num">03</div>
+                    <h3>Herramientas</h3>
+                    <p>Dominio y creación de metodologías de revisión y documentos personalizados.</p>
+                </div>
+                <div class="intro-card">
+                    <div class="card-num">04</div>
+                    <h3>Capacidad Técnica</h3>
+                    <p>Conocimiento avanzado sobre el método de compartir pantalla (Screenshare) y softwares de staff.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contact">
+            <div class="section-tag">02 / Contact</div>
+            <h2>Contacto</h2>
+            <div class="contact-box">
+                <div>
+                    <div style="color: var(--muted-color); font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px;">DISCORD</div>
+                    <div class="discord-tag" id="discordUser">.jzfg</div>
+                </div>
+                <button class="btn-copy" onclick="copyDiscord()">Copiar</button>
+            </div>
+        </section>
+
+        <!-- EXPERIENCIA -->
+        <section id="experience">
+            <div class="section-tag">03 / Experience</div>
+            <h2>Experiencia</h2>
+            <p style="color: var(--muted-color); margin-bottom: 20px; font-size: 0.9rem;">Historial de servidores y posiciones desempeñadas. Haz clic en una experiencia para ver los detalles del motivo de salida.</p>
+            
+            <div class="exp-list">
+                
+                <!-- Servidor 1 -->
+                <div class="exp-item">
+                    <div class="exp-header" onclick="toggleExp(this)">
+                        <div class="exp-title">
+                            <strong>Servidor Ejemplo PvP</strong>
+                            <span>SS Manager</span>
+                        </div>
+                        <div class="exp-arrow">▼</div>
+                    </div>
+                    <div class="exp-content">
+                        <div class="exp-body">
+                            Renuncia voluntaria debido a reestructuraciones internas y falta de tiempo para dedicarle al servidor de manera óptima.
+  </div>
+  
